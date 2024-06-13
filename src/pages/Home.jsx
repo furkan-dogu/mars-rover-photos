@@ -3,6 +3,7 @@ import axios from 'axios'
 
 const Home = () => {
     const [info, setInfo] = useState(null)
+    const [photos, setPhotos] = useState([])
 
     const API_KEY = import.meta.env.VITE_API_KEY
     
@@ -19,10 +20,25 @@ const Home = () => {
         getData()
     }, [])
 
-    console.log(info);
+    const filterCamera = (camera) => {
+        const filterphoto = info.photos.filter(photo => photo.camera.name === camera)
+        setPhotos(filterphoto)
+    }
+
+    const cameras = ["FHAZ", "NAVCAM", "MAST", "CHEMCAM", "RHAZ"]
     
   return (
-    <div>Home</div>
+    <div>
+        {cameras.map(item => (
+            <button key={item} onClick={() => filterCamera(item)}>{item}</button>
+        ))}
+        <button onClick={() => setPhotos(info.photos)}>ALL</button>
+        {photos.map(item => (
+            <div key={item.id} >
+                <img src={item.img_src} alt={item.id} width={150} height={100} />
+            </div>
+        ))}
+    </div>
   )
 }
 

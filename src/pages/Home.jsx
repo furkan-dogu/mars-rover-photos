@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense, lazy } from 'react'
 import axios from 'axios'
+import Loading from "../assets/loading.gif"
 
 const Home = () => {
     const [info, setInfo] = useState(null)
@@ -27,25 +28,23 @@ const Home = () => {
 
     const cameras = ["FHAZ", "NAVCAM", "MAST", "CHEMCAM", "RHAZ"]
 
+    const Card = lazy(() => import("../components/Card"))
+
     return (
         <div className='screen'>
-            <h1>Mars Rover Photos</h1>
-            <h3>Cameras</h3>
+            <h1 className='title'>Mars Rover Photos</h1>
+            <h3 className='cameras'>Cameras</h3>
             <div className='buttons'>
                 <button onClick={() => setPhotosData(info.photos)}>ALL</button>
                 {cameras.map(item => (
                     <button key={item} onClick={() => filterCamera(item)}>{item}</button>
                 ))}
             </div>
-            {photosData.length && <h3>Photos</h3>}
+            {photosData.length ? <h3 className='photos'>Photos ({photosData.length} Pieces)</h3> : null}
             <div className='cards'>
-                {photosData.map(item => (
-                    <div key={item.id} className='card'>
-                        <img src={item.img_src} alt={item.id} />
-                        <p>Date: {item.earth_date}</p>
-                        <p>Camera: {item.camera.full_name}</p>
-                    </div>
-                ))}
+                <Suspense fallback={<img src={Loading} alt="Loading..." className='loading' />}>
+                    <Card photosData={photosData} />
+                </Suspense>
             </div>
         </div>
     )

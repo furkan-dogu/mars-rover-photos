@@ -47,6 +47,7 @@ Mars Rover Photos (folder)
 │    ├── assets
 │    │     └── [images]
 │    ├── components      
+│    │     ├── Button.jsx  
 │    │     └── Card.jsx  
 │    ├── pages
 │    │     └── Home.jsx 

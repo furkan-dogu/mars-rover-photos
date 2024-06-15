@@ -9,6 +9,8 @@ body {
     background-image: url("./assets/space.jpg");
     background-attachment: fixed;
     color: white;
+    position: relative;
+    height: 100vh;
 }
 
 .screen {
@@ -64,10 +66,6 @@ body {
         flex-wrap: wrap;
         gap: 30px;
 
-        .loading {
-            width: 200px;
-        }
-
         .card {
             img {
                 width: 300px;
@@ -85,4 +83,12 @@ body {
             }
         }
     }
+}
+
+.loading {
+    width: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

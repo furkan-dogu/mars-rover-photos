@@ -1,9 +1,9 @@
 import React from "react";
 
-const Card = ({ photosData }) => {
+const Card = ({ filteredData }) => {
     return (
         <>
-            {photosData.map((item) => (
+            {filteredData.map((item) => (
                 <div key={item.id} className="card">
                     <img src={item.img_src} alt={item.id} />
                     <p>Date: {item.earth_date}</p>

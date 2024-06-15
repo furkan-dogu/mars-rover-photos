@@ -8,6 +8,7 @@ const Home = () => {
     const [info, setInfo] = useState(null)
     const [filteredData, setFilteredData] = useState([])
     const [loading, setLoading] = useState(false)
+    const [cameraName, setCameraName] = useState("ALL")
 
     const API_KEY = import.meta.env.VITE_API_KEY
     
@@ -36,9 +37,9 @@ const Home = () => {
                 <h1 className='title'>Mars Rover Photos</h1>
                 <h3 className='cameras'>Cameras</h3>
                 <div className='buttons'>
-                    <Button setFilteredData={setFilteredData} info={info} />
+                    <Button setFilteredData={setFilteredData} info={info} setCameraName={setCameraName} />
                 </div>
-                {filteredData.length ? <h3 className='photos'>Photos ({filteredData.length} Pieces)</h3> : null}
+                <h3 className='photos'>{cameraName} PHOTOS</h3>
                 <div className='cards'>               
                     <Card filteredData={filteredData} />               
                 </div>

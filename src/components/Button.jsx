@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Button = ({ setFilteredData, info }) => {
+const Button = ({ setFilteredData, info, setCameraName }) => {
 
   const filterCamera = (camera) => {
     if(camera === "ALL") {
@@ -12,10 +12,15 @@ const Button = ({ setFilteredData, info }) => {
 
   const cameras = ["ALL", "FHAZ", "NAVCAM", "MAST", "CHEMCAM", "RHAZ"]
 
+  const handleClick = (item) => {
+    filterCamera(item)
+    setCameraName(item)
+  }
+
   return (
     <>
       {cameras.map(item => (
-        <button key={item} onClick={() => filterCamera(item)}>{item}</button>
+        <button key={item} onClick={() => handleClick(item)}>{item}</button>
       ))}
     </>
   )
